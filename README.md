@@ -1,60 +1,61 @@
-C++ Algorithms
 
-This repository contains implementations of common algorithms in C++ for learning and practice.  
-Each algorithm has its own folder with source code and a README explaining usage.
+# Algorithms in C++*
 
----
+This repository contains implementations of fundamental graph algorithms
+**in C+**+.
+The goal is to build a collection of examples for educational purposes and self-learning.
 
-Algorithms
+## Implemented Algorithms
 
-- DFS (DFS/) — Depth-First Search
-- BFS (BFS/) — Breadth-First Search
-- Dijkstra (Dijkstra/) — Dijkstra's Shortest Path Algorithm
+-   DFS (Depth-First Search)
+-   BFS (Breadth-First Search)
+-   More algorithms coming soon (Dijkstra, MST, LCA, etc.)
 
----
+## Project Structure
 
-Repository Structure
+Each algorithm is placed in its own folder:
 
-cpp-algorithms/
-│
-├─ README.md           # this file
-├─ .gitignore          # ignored files for Visual Studio / C++
-├─ DFS/
-│   ├─ DFS.cpp         # code for DFS
-│   └─ README.md       # description and example for DFS
-├─ BFS/
-│   ├─ BFS.cpp
-│   └─ README.md
-├─ Dijkstra/
-│   ├─ Dijkstra.cpp
-│   └─ README.md
+    project_root/
+    │
+    ├── dfs/
+    │   ├── dfs.cpp
+    │   └── README.md
+    │
+    ├── bfs/
+    │   ├── bfs.cpp
+    │   └── README.md
+    │
+    └── README.md   <- this file
 
-- Each algorithm folder contains source code and a README with explanation and example usage.
+## How to Build & Run
 
----
+1.  Clone the repository:
 
-Usage
+        git clone https://github.com/<your-username>/<repo-name>.git
+        cd <repo-name>
 
-1. Clone the repository:
+2.  Go to the folder with the algorithm you want to build, for example
+    BFS:
 
-git clone https://github.com/username/cpp-algorithms.git
+        cd bfs
 
-2. Open the folder in Visual Studio or any C++ IDE.  
-3. Navigate to an algorithm folder (e.g., DFS/) and build/run the code.  
+3.  Compile:
 
----
+        g++ bfs.cpp -o bfs
 
-Contributing
+4.  Run:
 
-- Feel free to add new algorithms in separate folders.  
-- Keep each algorithm self-contained with its own README.  
-- Use .gitignore to avoid committing binaries or IDE-specific files.
+        ./bfs
 
----
+Notes
 
-References
+ -   Code is written in modern C++17.
+ -   Graphs are implemented as adjacency lists.
+ -   Default weights are 1 (unweighted graph), but algorithms can be
+    extended to weighted graphs.
+ - 0 - K BFS, Kosaraju's algorithm, Topological sorting will be added soon
 
-- DFS on Wikipedia: https://en.wikipedia.org/wiki/Depth-first_search  
-- BFS on Wikipedia: https://en.wikipedia.org/wiki/Breadth-first_search  
-- Dijkstra's Algorithm on Wikipedia: https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
-- Algorithms and Data structures course[RUS]: https://www.youtube.com/playlist?list=PL4_hYwCyhAvaUQ6oGA7sjUcf2VXSo1Txy
+------------------------------------------------------------------------
+
+✍️ Contributions are welcome — feel free to add new algorithms or
+improve documentation.
