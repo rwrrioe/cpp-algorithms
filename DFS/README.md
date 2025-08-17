@@ -1,60 +1,48 @@
-DFS (Depth-First Search)
+# Depth-First Search (DFS)
 
-This folder contains the implementation of Depth-First Search (DFS) in C++.
+This folder contains an implementation of the Depth-First Search (DFS)
+algorithm in C++.
+DFS is a fundamental graph traversal algorithm that explores as far as
+possible along each branch before backtracking.
 
----
+------------------------------------------------------------------------
 
-Files
+## Algorithm Overview
 
-- DFS.cpp — source code
-- README.md — this file
+-   DFS starts from a given node (source).
+-   It explores one branch completely before moving to another branch.
+-   Can be implemented using recursion (stack implicitly) or an explicit
+    stack.
 
----
+------------------------------------------------------------------------
 
-Description
+## File Structure
 
-DFS is a graph traversal algorithm that explores as far as possible along each branch before backtracking.
-This implementation tracks parents and children of each node and uses in/out timestamps.
+    dfs/
+    ├── dfs.cpp      # Implementation of DFS
+    └── README.md    # Documentation (this file)
 
----
+------------------------------------------------------------------------
 
-Example Graph
+## How to Build & Run
 
-0 → 1 → 3
-│
-└→ 2
+1.  Navigate to the dfs folder:
 
-- Start DFS from node 0.
-- Traversal order: 0 → 1 → 3 → 2 (depending on children order in vector)
+        cd dfs
 
----
+2.  Compile the code:
 
-Example Usage
+        g++ dfs.cpp -o dfs
 
-#include "DFS.cpp"
+3.  Run the program:
 
-int main() {
-    Graph g({0, 1, 2, 3});
-    g.addEdge(0, 1);
-    g.addEdge(0, 2);
-    g.addEdge(1, 3);
+        ./dfs
 
-    g.DFS(0); // start DFS from node 0
+------------------------------------------------------------------------
 
-    return 0;
-}
+## Notes
 
-- DFS.cpp implements the DFS traversal with parent/children vectors, tin/tout timestamps, and node coloring.
-
----
-
-Complexity
-
-- Time Complexity: O(V + E) — visits each node and edge once
-- Space Complexity: O(V) — for color, tin, tout vectors
-
----
-
-References
-
-- Depth-First Search on Wikipedia: https://en.wikipedia.org/wiki/Depth-first_search
+-   Written in modern C++17.
+-   Uses adjacency lists for graph representation.
+-   Can be easily extended to handle weighted graphs or iterative DFS.
+-   Topological sorting, Kosaraju/Tarjan algorithms will be added soon.
