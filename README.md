@@ -1,5 +1,5 @@
 
-# Algorithms in C++*
+# Algorithms in C++
 
 This repository contains implementations of fundamental graph algorithms
 **in C+**+.
