@@ -1,31 +1,39 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <queue>
 using namespace std;
 
-// this is the simplest, greedy like implementation, and it takes O(N^2)
+const int INF = static_cast<int>(1e9);
 
+// this is the simplest, greedy like implementation, and it takes O(N^2)
 class Graph {
 	class Node {
 	public:
 		int V;
-		vector<pair<int,int>>parents; // (parent, weight)
-		vector<pair<int,int>>children; // (child, weight)
-		Node(int value = 0) : V(value) {} //value by default; optimized to implement in generics
-
+		// (parent, weight)
+		vector<pair<int,int>>parents;
+		// (child, weight)
+		vector<pair<int,int>>children; 
+		//value by default; optimized to implement in generics
+		Node(int value = 0) : V(value) {}
 	};
 
 public:
 	vector<Node>nodes;
-	
+	//found by Dijkstra distance from the startNode to current node
+	vector<int>dist; 
+	vector<bool>expanded;
+	//we store queue of nodes with distance == x for each x
+	map<int, queue<int>> q; 
 	Graph(const vector<int>& values) {
 		for (int v : values)
 		{
 			nodes.push_back(Node(v));
 		}
 		int n = nodes.size();
-
-		
+		dist.resize(n, INF);
+		expanded.resize(n, false);
 	}
 
 	//simple functions of adding nodes and edges
@@ -61,16 +69,16 @@ public:
 		}
 	}
 	void addEdge(int from, int to, int weight) {  
-		if (from = > nodes.size() || to <= nodes.size()) { return; }
-		nodes[from].children.push_back(to, weight);
-		nodes[to].parents.push_back(from, weight);
+		if (from >= nodes.size() || to >= nodes.size()) { return; }
+		nodes[from].children.push_back({ to, weight });
+		nodes[to].parents.push_back({ from, weight });
 	}
 	void removeEdge(int from, int to) {
 		auto& children = nodes[from].children;
 		children.erase(
-			remove_if(children.begin(), children.end,
+			remove_if(children.begin(), children.end(),
 				[&](auto& p) {return p.first == to;}),
-			children(end)
+			children.end()
 		);
 
 		auto& parents = nodes[to].parents;
@@ -78,10 +86,41 @@ public:
 			remove_if(parents.begin(), parents.end(),
 				[&](auto& p) {return p.first == from;}),
 			parents.end()
-		)
+		);
 		//shifts all elements except 'from' to the left, then deletes 'from' Node
 	}
 
-
-	void Dijkstra(int startNode);	// main function
+	// main functions
+	void expand(int V);
+	void Dijkstra(int startNode);	
 };
+
+void Graph::expand(int V) {
+	if (expanded[V] == true) { return; }
+
+	int y;
+	for  (int &[child,weight] : nodes[V].children)
+	{
+		y = dist[V] + weight;
+		if (dist[child] > y) {
+			dist[child] = y;
+			q[y].push(child);
+		}
+	}
+}
+
+void Graph::Dijkstra(int startNode) {
+	dist[startNode] = 0;
+	q[0].push(startNode);
+
+	while (!q.empty()) {
+		auto it = q.begin();
+		int v = it->second.front();
+		it->second.pop();
+		if (it->second.empty()) q.erase(it);
+
+		if (expanded[v]) continue;
+		expanded[v] = true;
+		expand(v);
+	}
+}
