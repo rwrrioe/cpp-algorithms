@@ -25,6 +25,10 @@ Each algorithm is placed in its own folder:
     │   ├── bfs.cpp
     │   └── README.md
     │
+    ├──dijkstra/
+    |   ├── dijkstra.cpp
+    │   └── README.md
+    |
     └── README.md   <- this file
 
 ## How to Build & Run
