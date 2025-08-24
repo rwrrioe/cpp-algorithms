@@ -6,7 +6,7 @@ using namespace std;
 
 const int INF = static_cast<int>(1e9);
 
-// this is the simplest, greedy like implementation, and it takes O(N^2)
+// this is the simplest, greedy like implementation, and it takes O(N^2 logN)
 class Graph {
 	class Node {
 	public:
@@ -40,7 +40,7 @@ public:
 	void addNode(int V) { nodes.push_back(Node(V)); }
 	void removeNode(int V) {
 		//removal of incident edges
-		for (auto &[child,_] : nodes[V].children)
+		for (auto &[child, ignore] : nodes[V].children)
 		{
 			auto& parents = nodes[child].parents;
 			parents.erase(
@@ -50,7 +50,7 @@ public:
 			);
 		}
 
-		for (auto& [parent, _] : nodes[V].parents)
+		for (auto& [parent, ignore] : nodes[V].parents)
 		{
 			auto& children = nodes[parent].children;
 			children.erase(
