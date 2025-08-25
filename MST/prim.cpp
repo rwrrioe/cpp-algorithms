@@ -95,5 +95,29 @@ void Graph::Prim(int startNode) {
 	component.push_back(startNode);
 
 	auto children = nodes[startNode].children;
-	
+
+	while (component.size() < nodes.size()) {
+		pair<int, int> bestEdge = { -1, INT_MAX };
+
+		// Go through all vertices in the current MST component and find 
+		// the smallest edge that connects it to a vertex not yet in the tree
+		for (auto u : component)
+		{
+			for (auto& edge : nodes[u].children) {
+				if (!isThere[edge.first] && edge.second < bestEdge.second)
+				{
+					bestEdge = { edge.first, edge.second };
+				}
+			}
+		}
+
+		if (bestEdge.first != -1) {
+			isThere[bestEdge.first] = true;
+			component.push_back(bestEdge.first);
+			cout << "Edge:" << bestEdge.first << " ";
+			cout << "With weight" << bestEdge.second << " added\n";
+		}
+
+	}
 }
+
